@@ -23,6 +23,14 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'users.action')
+            ->addColumn('roles', function(User $user){
+                return $user->roles->map(function($roles){
+                    return $roles->name;
+                })->first();
+            })
+            ->editColumn('updated_at', function(User $user){
+                return \Carbon\Carbon::parse($user->created_at)->diffForHumans();
+            })
             ->setRowId('id');
     }
 
@@ -31,7 +39,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('roles');
     }
 
     /**
@@ -63,10 +71,10 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name')->title("Nombre"),
+            Column::make('email')->title("Correo"),
+            Column::make('roles')->title("Roles"),
+            Column::make('updated_at')->title("Última actualización"),
         ];
     }
 

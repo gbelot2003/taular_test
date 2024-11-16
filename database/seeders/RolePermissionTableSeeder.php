@@ -54,9 +54,6 @@ class RolePermissionTableSeeder extends Seeder
             ['name' => 'Alumno User', 'email' => 'alumno@example.com', 'role' => 'alumno'],
         ];
 
-        $suser = User::findOrFail(51);
-        $suser->assignRole('administrador');
-
         foreach ($users as $userData) {
             $user = User::create([
                 'name' => $userData['name'],
@@ -65,5 +62,8 @@ class RolePermissionTableSeeder extends Seeder
             ]);
             $user->assignRole($userData['role']);
         }
+
+        //$suser = User::findOrFail(51);
+        //$suser->assignRole('administrador');
     }
 }

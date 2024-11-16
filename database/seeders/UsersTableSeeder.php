@@ -14,8 +14,17 @@ class UsersTableSeeder extends Seeder
     {
         \App\Models\User::factory(50)->create();
 
-        \App\Models\User::factory()->create([
+        $users = \App\Models\User::all();
+        foreach ($users as $user) {
+            $user->assignRole('alumno')->first();
+        }
+
+
+        $admin = \App\Models\User::factory()->create([
             'name' => 'Gerardo Belot',
             'email' => 'gbelot2003@hotmail.com',
-        ]);    }
+        ]);
+
+        $admin->assignRole('administrador');
+    }
 }
