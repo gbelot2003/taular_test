@@ -50,18 +50,13 @@ class UsersDataTable extends DataTable
         return $this->builder()
                     ->setTableId('users-table')
                     ->columns($this->getColumns())
+                    ->parameters([
+                        'dom'          => 'Bfrtip',
+                        'buttons'      => ['export', 'print', 'reset', 'reload'],
+                    ])
                     ->minifiedAjax()
                     ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('add'),
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload'),
-                    ]);
+                    ->selectStyleSingle();
     }
 
     /**
@@ -73,8 +68,9 @@ class UsersDataTable extends DataTable
             Column::make('id'),
             Column::make('name')->title("Nombre"),
             Column::make('email')->title("Correo"),
-            Column::make('roles')->title("Roles"),
+            Column::make('roles')->title("Roles")->searchable(true)->sortable(true),
             Column::make('updated_at')->title("Última actualización"),
+            Column::computed('action'),
         ];
     }
 

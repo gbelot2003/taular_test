@@ -94,7 +94,7 @@
 
     {{-- Body Content --}}
     @yield('body')
-    @stack('scripts')
+
     {{-- Base Scripts (depends on Laravel asset bundling tool) --}}
     @if(config('adminlte.enabled_laravel_mix', false))
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
@@ -116,6 +116,7 @@
         @endswitch
     @endif
 
+
     {{-- Extra Configured Plugins Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
 
@@ -127,7 +128,7 @@
             <livewire:scripts />
         @endif
     @endif
-
+    @stack('scripts')
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 

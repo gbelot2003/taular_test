@@ -320,6 +320,8 @@ return [
         //     'url' => 'users',
         //     'can' => 'manage-blog',
         // ],
+
+        ['header' => 'account_settings'],
         [
             'text' => 'Usuarios',
             'url' => 'users',
@@ -327,7 +329,6 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url' => 'admin/settings',
@@ -444,9 +445,10 @@ return [
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
+
             ],
         ],
         'Select2' => [
